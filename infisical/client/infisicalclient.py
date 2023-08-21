@@ -15,7 +15,7 @@ from infisical.helpers.client import (
     update_secret_helper,
 )
 from infisical.models.models import SecretBundle
-from infisical.models.secret_service import ClientConfig
+from infisical.models.secret_service import ClientConfig, WorkspaceConfig
 from infisical.utils.crypto import (
     create_symmetric_key_helper,
     decrypt_symmetric_helper,
@@ -31,6 +31,7 @@ class InfisicalClient:
         site_url: str = INFISICAL_URL,
         debug: bool = False,
         cache_ttl: int = 300,
+        workspace_config: Optional[WorkspaceConfig] = None,
     ):
         self.cache: Dict[str, SecretBundle] = {}
         self.client_config: Optional[ClientConfig] = None
@@ -47,6 +48,7 @@ class InfisicalClient:
             self.client_config = ClientConfig(
                 auth_mode=AUTH_MODE_SERVICE_TOKEN,
                 credentials={"service_token_key": service_token_key},
+                workspace_config=workspace_config,
                 cache_ttl=cache_ttl,
             )
 
