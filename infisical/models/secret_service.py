@@ -13,5 +13,5 @@ class WorkspaceConfig(BaseModel):
 class ClientConfig(BaseModel):
     auth_mode: Literal["service_token"]
     credentials: Dict[Literal["service_token_key"], str]
-    workspace_config: Optional[WorkspaceConfig]
+    workspace_config: Optional[WorkspaceConfig] = None
     cache_ttl: int
